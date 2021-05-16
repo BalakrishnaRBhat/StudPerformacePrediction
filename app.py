@@ -1,3 +1,4 @@
+import requests
 from flask import Flask, render_template, redirect, url_for, session, request, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate, migrate
@@ -22,6 +23,9 @@ class Users(db.Model):
         self.email = email
         self.password = password
 
+def predict(marks):
+    predicted_marks = requests.post('http://localhost:6000/predict', marks).json()
+    return predicted_marks
 
 @app.route('/')
 def home():
@@ -54,11 +58,36 @@ def login():
         else:
             return render_template('login.html')
 
-@app.route('/dashboard/')
+@app.route('/dashboard/', methods=['POST', 'GET'])
 def dashboard():
     if "user" in session:
-        user = session["user"]
-        return render_template("dashboard.html", user=user)
+        if request.method == "POST":
+            name = request.form["name"]
+            usn = request.form["usn"]
+            sub1 = int(request.form["sub1"])
+            sub2 = int(request.form["sub2"])
+            sub3 = int(request.form["sub3"])
+            sub4 = int(request.form["sub4"])
+            sub5 = int(request.form["sub5"])
+            sub6 = int(request.form["sub6"])
+            sub7 = int(request.form["sub7"])
+            sub8 = int(request.form["sub8"])
+            # print(name, usn, sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8)
+            marks = {
+                "f1": sub1,
+                "f2": sub2,
+                "f3": sub3,
+                "f4": sub4,
+                "f5": sub5,
+                "f6": sub6,
+                "f7": sub7,
+                "f8": sub8
+            }
+            predicted_marks = predict(marks)     
+            return predicted_marks
+        else:
+            return render_template('dashboard.html')
+
     else:
         return redirect(url_for("home"))
          
