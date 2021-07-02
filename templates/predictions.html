@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <style>
+        .container {
+            padding-top: 200px;
+        }
+        .card {
+            background-color: white;
+        }
+        .card-title {
+            font-size: 70px;
+        }
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .usn {
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .pred_btn {
+            margin: 10px;
+        }
+        table, thead, tbody, th, td {
+            border: none;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+</head>
+<body>
+   <div class="container">
+       <div class="row">
+           <div class="column">
+               <div class="card">
+                <div class="card-body">   
+                <h5 class="card-title text-center headline">Predicted marks</h5>
+                <p class="name">Name: {{name}}</p>
+                <p class="usn">USN: {{usn}}</p>
+                <table class="table text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Marks</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                          <td>Advanced Calculus And Numerical Methods</td>
+                          <td>{{predicted_marks['Advanced Calculus And Numerical Methods']}}</td>
+                      </tr>
+                      <tr>
+                        <td>Engineering Chemistry</td>
+                        <td>{{predicted_marks['Engineering Chemistry']}}</td>
+                    </tr>
+                    <tr>
+                        <td>C Programming For Problem Solving</td>
+                        <td>{{predicted_marks['C Programming For Problem Solving']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Basic Electronics</td>
+                        <td>{{predicted_marks['Basic Electronics']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Elements Of Mechanical Engineering</td>
+                        <td>{{predicted_marks['Elements Of Mechanical Engineering']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Engineering Chemistry Laboratory</td>
+                        <td>{{predicted_marks['Engineering Chemistry Laboratory']}}</td>
+                    </tr>
+                    <tr>
+                        <td>C Programming Laboratory</td>
+                        <td>{{predicted_marks['C Programming Laboratory']}}</td>
+                    </tr>
+                    <tr>
+                        <td>Technical English 2</td>
+                        <td>{{predicted_marks['Technical English 2']}}</td>
+                    </tr>
+                    </tbody>
+                  </table>  
+                </div>
+                <div class="pred_btn text-center">
+                    <a href="/dashboard">
+                        <button class="btn btl-lg btn-primary btn-blk text-uppercase text-center">Predict New</button>
+                    </a>
+                </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   
+</body>
+</html>
+
+
+{% endblock %}

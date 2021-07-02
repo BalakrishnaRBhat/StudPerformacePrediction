@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, render_template, redirect, url_for, session, request, flash
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate, migrate
+from flask_migrate import Migrate
 import bcrypt
 
 app = Flask(__name__)
@@ -74,17 +74,18 @@ def dashboard():
             sub8 = int(request.form["sub8"])
             # print(name, usn, sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8)
             marks = {
-                "f1": sub1,
-                "f2": sub2,
-                "f3": sub3,
-                "f4": sub4,
-                "f5": sub5,
-                "f6": sub6,
-                "f7": sub7,
-                "f8": sub8
+                "Calculus And Linear Algebra": sub1,
+                "Engineering Physics": sub2,
+                "Basic Electrical Engineering": sub3,
+                "Elements of Civil Engineering And Mechanics": sub4,
+                "Engineering Graphics": sub5,
+                "Engineering Physics Laboratory": sub6,
+                "Basic Electrical Engineering Laboratory": sub7,
+                "Technical English 1": sub8
             }
-            predicted_marks = predict(marks)     
-            return predicted_marks
+            predicted_marks = predict(marks) 
+            print(predicted_marks)    
+            return render_template('predictions.html', predicted_marks=predicted_marks, name=name, usn=usn)
         else:
             return render_template('dashboard.html')
 
