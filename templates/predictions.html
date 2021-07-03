@@ -8,27 +8,39 @@
 
     <style>
         .container {
-            padding-top: 200px;
+            padding-top: 100px;
+            margin: auto;
         }
         .card {
-            background-color: white;
+            background-color: #7E57C2;
+            border-color: #512DA8;
         }
         .card-title {
             font-size: 70px;
         }
-        .name {
-            font-size: 20px;
+        .name, .usn{
+            font-size: 30px;
             font-weight: bold;
         }
-        .usn {
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .pred_btn {
+      
+        .pred-btn {
+            width: 250px;
             margin: 10px;
+            align-self: center;
+            border-radius: 40px;
+            background-color: #6200EA;
+
+        }
+        .btn {
+            font-size: 120%;
+            font-weight: bold;
         }
         table, thead, tbody, th, td {
             border: none;
+        }
+        th, td {
+            font-weight: bold;
+            font-size: 20px;
         }
     </style>
 
@@ -89,9 +101,9 @@
                     </tbody>
                   </table>  
                 </div>
-                <div class="pred_btn text-center">
+                <div class="pred-btn text-center">
                     <a href="/dashboard">
-                        <button class="btn btl-lg btn-primary btn-blk text-uppercase text-center">Predict New</button>
+                        <button class="btn btn-blk text-uppercase text-center">Predict New</button>
                     </a>
                 </div>
                </div>

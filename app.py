@@ -62,30 +62,51 @@ def login():
 def dashboard():
     if "user" in session:
         if request.method == "POST":
+
             name = request.form["name"]
             usn = request.form["usn"]
-            sub1 = int(request.form["sub1"])
-            sub2 = int(request.form["sub2"])
-            sub3 = int(request.form["sub3"])
-            sub4 = int(request.form["sub4"])
-            sub5 = int(request.form["sub5"])
-            sub6 = int(request.form["sub6"])
-            sub7 = int(request.form["sub7"])
-            sub8 = int(request.form["sub8"])
-            # print(name, usn, sub1, sub2, sub3, sub4, sub5, sub6, sub7, sub8)
-            marks = {
-                "Calculus And Linear Algebra": sub1,
-                "Engineering Physics": sub2,
-                "Basic Electrical Engineering": sub3,
-                "Elements of Civil Engineering And Mechanics": sub4,
-                "Engineering Graphics": sub5,
-                "Engineering Physics Laboratory": sub6,
-                "Basic Electrical Engineering Laboratory": sub7,
-                "Technical English 1": sub8
-            }
-            predicted_marks = predict(marks) 
-            print(predicted_marks)    
-            return render_template('predictions.html', predicted_marks=predicted_marks, name=name, usn=usn)
+            sub1 = request.form["sub1"]
+            sub2 = request.form["sub2"]
+            sub3 = request.form["sub3"]
+            sub4 = request.form["sub4"]
+            sub5 = request.form["sub5"]
+            sub6 = request.form["sub6"]
+            sub7 = request.form["sub7"]
+            sub8 = request.form["sub8"]
+            
+            if sub1.isdigit() and sub1.isdigit() and sub1.isdigit() and sub1.isdigit() and sub1.isdigit() and sub1.isdigit() and sub1.isdigit() and sub1.isdigit(): 
+                sub1 = int(request.form["sub1"])
+                sub2 = int(request.form["sub2"])
+                sub3 = int(request.form["sub3"])
+                sub4 = int(request.form["sub4"])
+                sub5 = int(request.form["sub5"])
+                sub6 = int(request.form["sub6"])
+                sub7 = int(request.form["sub7"])
+                sub8 = int(request.form["sub8"])
+        
+                if sub1 > 100 or sub2 > 100 or sub3 > 100 or sub4 > 100 or sub5 > 100 or sub6 > 100 or sub7 > 100:
+
+                    flash("Marks cannot be more that 100")
+                    return render_template('dashboard.html')
+                
+                else: 
+                    marks = {
+                        "Calculus And Linear Algebra": sub1,
+                        "Engineering Physics": sub2,
+                        "Basic Electrical Engineering": sub3,
+                        "Elements of Civil Engineering And Mechanics": sub4,
+                        "Engineering Graphics": sub5,
+                        "Engineering Physics Laboratory": sub6,
+                        "Basic Electrical Engineering Laboratory": sub7,
+                        "Technical English 1": sub8
+                    }
+                    predicted_marks = predict(marks) 
+                    print(predicted_marks)    
+                    return render_template('predictions.html', predicted_marks=predicted_marks, name=name, usn=usn)
+            else:
+                flash("Marks must be in digits")
+                return render_template('dashboard.html')
+                
         else:
             return render_template('dashboard.html')
 
